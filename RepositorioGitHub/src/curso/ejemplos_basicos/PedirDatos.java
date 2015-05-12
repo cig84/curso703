@@ -62,6 +62,14 @@ public class PedirDatos {
 		return nota;
 	}
 	
+	public static String pedirIdioma() {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("En que idioma quiere leer el texto?: ");
+		String idioma = sc.next();
+		return idioma;
+	}
+	
 //	public static int[] pedirArray() {
 //		
 //		Scanner sc = new Scanner(System.in);
