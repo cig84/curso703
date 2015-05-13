@@ -1,0 +1,11 @@
+¿Qué es realmente equals?
+
+http://www.ibm.com/developerworks/library/j-jtp05273/
+
+Última versión de la documentación oficial de JAVA
+
+https://docs.oracle.com/javase/tutorial/tutorialLearningPaths.html
+
+Paso por valor y por referencia
+
+http://www.javaworld.com/article/2077424/learn-java/does-java-pass-by-reference-or-pass-by-value.html
