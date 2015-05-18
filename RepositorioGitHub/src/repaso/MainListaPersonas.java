@@ -1,5 +1,7 @@
 package ejercicios.de.repaso;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import curso.ejemplos_basicos.PedirDatos;
@@ -9,8 +11,11 @@ public class MainListaPersonas {
 	/**
 	 * @param args
 	 * @throws InsertarPersonaException 
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
+	 * @throws FileNotFoundException 
 	 */
-	public static void main(String[] args) throws InsertarPersonaException {
+	public static void main(String[] args) throws InsertarPersonaException, FileNotFoundException, ClassNotFoundException, IOException {
 
 		ListaPersonas lista = new ListaPersonas();
 		Persona p = null;
@@ -22,7 +27,11 @@ public class MainListaPersonas {
 			switch (menu) {
 			case 1:
 				p = new Persona(PedirDatos.pedirNombre(), PedirDatos.pedirEdad());
-				lista.insertarPersona(p);
+				if (lista.est·Repetido(p)) {
+					System.out.println("La persona que quieres insertar ya est·");
+				}else if (lista.estaLlena()) {
+					System.out.println("La lista est· llena");
+				}else lista.insertarPersona(p);
 				break;
 			case 2:
 				lista.mostrar();
@@ -42,13 +51,21 @@ public class MainListaPersonas {
 				System.out.println(n);
 				break;
 			case 6:
+				lista.eliminarPersona(p = new Persona(PedirDatos.pedirNombre(), PedirDatos.pedirEdad()));
+				break;
+			case 7:
 				boolean ser = lista.serializar();
 				if (ser) 
 				break;
-			case 7:
+			case 8:
 				Persona [] arrayDeserializado = lista.deserializar();
+				for (int i=0; i<arrayDeserializado.length; i++) {
+					if (arrayDeserializado[i]!= null) {
+						System.out.println(arrayDeserializado[i]);
+					}
+				}
 				break;
-			case 8: salir = true;
+			case 9: salir = true;
 				break;
 			default:
 				System.out.println("La opciÛn selecionada no existe");
@@ -66,9 +83,10 @@ public class MainListaPersonas {
 		System.out.println("3 - Buscar persona por nombre");
 		System.out.println("4 - Buscar persona por edad");
 		System.out.println("5 - Ver numero personas en la lista");
-		System.out.println("6 - Guardar la lista en un fichero");
-		System.out.println("7 - Mostrar una lista guardada en un fichero");
-		System.out.println("8 - Salir");
+		System.out.println("6 - Eliminar una persona");
+		System.out.println("7 - Guardar la lista en un fichero");
+		System.out.println("8 - Mostrar una lista guardada en un fichero");
+		System.out.println("9 - Salir");
 		Scanner sc = new Scanner(System.in);
 		int i = sc.nextInt();
 		return i;

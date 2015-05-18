@@ -2,9 +2,11 @@ package ejercicios.de.repaso;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Properties;
 
 import org.omg.CORBA.CODESET_INCOMPATIBLE;
@@ -50,14 +52,15 @@ public class ListaPersonas {
 		int i=0;
 		Persona p = null;
 		boolean encontrado = false;
-		
-		while (i<numeroPersonas && encontrado==false) {
-			String nombrePersona = array_personas[i].getNombre();
-			if (nombrePersona.equals(nombre)) {
-			p = array_personas[i];
-			encontrado=true;
+		if (!this.estaVacia()) {
+			while (i<numeroPersonas && encontrado==false) {
+				String nombrePersona = array_personas[i].getNombre();
+				if (nombrePersona.equals(nombre)) {
+					p = array_personas[i];
+					encontrado=true;
+				}
+				i++;
 			}
-			i++;
 		}
 		return p;
 	}
@@ -69,16 +72,42 @@ public class ListaPersonas {
 		int i=0;
 		Persona p = null;
 		boolean encontrado = false;
-		
-		while (i<numeroPersonas && encontrado==false) {
-			int edadPersona = array_personas[i].getEdad();
-			if (edadPersona==edad) {
-			p = array_personas[i];
-			encontrado=true;
+		if (!this.estaVacia()) {
+			while (i<numeroPersonas && encontrado==false) {
+				int edadPersona = array_personas[i].getEdad();
+				if (edadPersona==edad) {
+					p = array_personas[i];
+					encontrado=true;
+				}
+				i++;
 			}
-			i++;
 		}
 		return p;
+	}
+	
+	public boolean estáRepetido (Persona p) {
+		
+		boolean repetido = false;
+		if (buscarPersona(p.getNombre())!= null && buscarPersona(p.getEdad())!= null) {
+			repetido = true;
+		}
+		return repetido;
+	}
+	
+	public void eliminarPersona (Persona p) {
+		
+		int i=0;
+		boolean encontrado = false;
+		if (!this.estaVacia()) {
+			while (i<numeroPersonas && encontrado==false) {
+				String nombrePersona = array_personas[i].getNombre();
+				if (nombrePersona.equals(p.getNombre())) {
+					array_personas[i]=array_personas[i+1];
+					encontrado=true;
+				}
+				i++;
+			}
+		}
 	}
 	
 	public boolean serializar () throws FileNotFoundException, IOException
@@ -90,17 +119,20 @@ public class ListaPersonas {
 		Properties propiedades = new Properties();
 		propiedades.load(new FileInputStream(".\\carpeta\\serializa.properties"));
 		FileWriter fw = new FileWriter(".\\carpeta\\" + propiedades.getProperty("destino"));
-		return false;
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(".\\carpeta\\" + propiedades.getProperty("destino")));
+		oos.writeObject(array_personas);
+		oos.close();
+		return true;
 	}
 	
-	public Persona[] deserializar() throws FileNotFoundException, IOException
+	public Persona[] deserializar() throws FileNotFoundException, IOException, ClassNotFoundException
 	{
 		Persona[] array = new Persona[CAPACIDAD];
 		Properties propiedades = new Properties();
-		p = null;
+		array = null;
 		propiedades.load(new FileInputStream(".\\carpeta\\serializa.properties"));
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(".\\carpeta\\" + propiedades.getProperty("destino")));	
-		persona = (Persona[])ois.readObject();
+		array = (Persona[])ois.readObject();
 		ois.close();
 		
 		return array;
@@ -122,10 +154,19 @@ public class ListaPersonas {
 	public boolean estaLlena()
 	{
 		boolean llena = false;
-		if (numeroPersonas==9) {
+		if (this.numeroPersonas==CAPACIDAD) {
 			llena = true;
 		}
 		return llena;
+	}
+	
+	public boolean estaVacia()
+	{
+		boolean vacia = false;
+		if (this.numeroPersonas==0) {
+			vacia = true;
+		}
+		return vacia;
 	}
 	
 	public void mostrar()
