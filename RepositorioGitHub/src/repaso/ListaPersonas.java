@@ -101,7 +101,8 @@ public class ListaPersonas {
 		if (!this.estaVacia()) {
 			while (i<numeroPersonas && encontrado==false) {
 				String nombrePersona = array_personas[i].getNombre();
-				if (nombrePersona.equals(p.getNombre())) {
+				int edadPersona = array_personas[i].getEdad();
+				if (nombrePersona.equals(p.getNombre()) && edadPersona == p.getEdad()) {
 					array_personas[i]=array_personas[numeroPersonas-1];
 					encontrado=true;
 					numeroPersonas--;
