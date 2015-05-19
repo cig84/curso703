@@ -1,4 +1,4 @@
-package ejercicios.de.repaso;
+package repaso;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,7 +11,7 @@ import java.util.Properties;
 
 import org.omg.CORBA.CODESET_INCOMPATIBLE;
 
-import ejercicios.de.repaso.InsertarPersonaException;
+import repaso.InsertarPersonaException;
 
 public class ListaPersonas {
 	
@@ -102,8 +102,9 @@ public class ListaPersonas {
 			while (i<numeroPersonas && encontrado==false) {
 				String nombrePersona = array_personas[i].getNombre();
 				if (nombrePersona.equals(p.getNombre())) {
-					array_personas[i]=array_personas[i+1];
+					array_personas[i]=array_personas[numeroPersonas-1];
 					encontrado=true;
+					numeroPersonas--;
 				}
 				i++;
 			}
@@ -173,10 +174,9 @@ public class ListaPersonas {
 	{
 		//MOSTRAR LA LISTA DE PERSONAS
 		// pista: ayudarse del método toString de persona
-		int i=0;
-		while (array_personas[i]!=null) {
+		int i;
+		for (i=0; i<numeroPersonas; i++) {
 			System.out.println(array_personas[i]);
-			i++;
 		}
 		
 	}

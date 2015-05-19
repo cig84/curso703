@@ -1,4 +1,4 @@
-package ejercicios.de.repaso;
+package repaso;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
