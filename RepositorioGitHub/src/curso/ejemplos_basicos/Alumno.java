@@ -31,10 +31,10 @@ public class Alumno extends Persona implements Serializable {
 		
 	}
 	
-	public Alumno(String s_nombre, byte b_edad, byte nota) {
+	public Alumno(String s_nombre, int i, int j) {
 		
-		super(s_nombre, b_edad);
-		this.nota = nota;
+		super(s_nombre, i);
+		this.nota = j;
 		this.notaAlumno = notaRecibida();
 		
 	}
