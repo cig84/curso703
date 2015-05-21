@@ -1,7 +1,7 @@
 package repaso;
 import java.io.Serializable;
 
-public class Persona implements Serializable {
+public class Persona implements Serializable, Comparable<Persona> {
 	
 	private int edad;
 	private String nombre;
@@ -35,6 +35,18 @@ public class Persona implements Serializable {
 	@Override
 	public String toString() {
 		return this.nombre + " " + this.edad;
+	}
+
+
+	@Override
+	public int compareTo(Persona p) {
+		int mayor = 0;
+		if (this.getEdad() == p.getEdad()) {
+			mayor = 0;
+		}else if (this.getEdad() < p.getEdad()) {
+			mayor = -1;
+		}else mayor = 1;
+		return mayor;
 	}
 	
 	

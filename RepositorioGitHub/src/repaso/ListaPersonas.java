@@ -7,23 +7,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Collections;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.omg.CORBA.CODESET_INCOMPATIBLE;
 
 import repaso.InsertarPersonaException;
 
+
 public class ListaPersonas {
 	
 	public static final int CAPACIDAD = 10;
-	
 	private Persona[] array_personas;
 	private static int numeroPersonas=0;
-	
-	
-	/**
-	 * Es muy posible que haga falta añadir algún campo más
-	 */
+	private final static Logger log = Logger.getLogger("mylog");
 	
 	public ListaPersonas()
 	{
@@ -32,10 +30,12 @@ public class ListaPersonas {
 			//RESERVAR MEMORIA
 			//INICIALIZAR EL ESTADO DEL OBJETO Y SUS ATRIBUTOS
 
+		
 		array_personas = new Persona[CAPACIDAD];
 		for (int i=0; i<array_personas.length; i++) {
 			array_personas[i] = null;
 		}
+		log.info("Lista de personas iniciada");
 	}
 	
 	public Persona[] getListaPersonas ()
@@ -146,6 +146,7 @@ public class ListaPersonas {
 			array_personas[numeroPersonas] = p;
 			numeroPersonas++;
 		}
+		log.info("La persona ha sido insertada");
 	}
 	
 	public int numeroPersonas()
@@ -175,6 +176,7 @@ public class ListaPersonas {
 	{
 		//MOSTRAR LA LISTA DE PERSONAS
 		// pista: ayudarse del método toString de persona
+//		Collections.sort(array_personas);
 		int i;
 		for (i=0; i<numeroPersonas; i++) {
 			System.out.println(array_personas[i]);

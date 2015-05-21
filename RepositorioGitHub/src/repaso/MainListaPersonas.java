@@ -4,9 +4,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-import curso.ejemplos_basicos.PedirDatos;
+import org.apache.log4j.Logger;
+
+import ejemplos_basicos.PedirDatos;
 
 public class MainListaPersonas {
+	
+	private final static Logger log = Logger.getLogger("mylog");
 
 	/**
 	 * @param args
@@ -28,9 +32,9 @@ public class MainListaPersonas {
 			case 1:
 				p = new Persona(PedirDatos.pedirNombre(), PedirDatos.pedirEdad());
 				if (lista.estáRepetido(p)) {
-					System.out.println("La persona que quieres insertar ya está");
+					log.info("La persona que quieres insertar ya está");
 				}else if (lista.estaLlena()) {
-					System.out.println("La lista está llena");
+					log.info("La lista está llena");
 				}else lista.insertarPersona(p);
 				break;
 			case 2:
@@ -68,7 +72,7 @@ public class MainListaPersonas {
 			case 9: salir = true;
 				break;
 			default:
-				System.out.println("La opción selecionada no existe");
+				log.info("La opción selecionada no existe");
 				break;
 			}
 			
