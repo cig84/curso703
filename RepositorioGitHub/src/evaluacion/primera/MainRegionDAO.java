@@ -13,7 +13,7 @@ public class MainRegionDAO {
 		List<RegionDTO> lista_regiones;
 		RegionDTO regionDTO;
 		try {
-//			RegionDAO.insertarNueva();
+			RegionDAO.insertarNueva();
 			regionDTO = RegionDAO.recuperarPorIdentificador();
 			lista_regiones = RegionDAO.obtenerTodas();
 			System.out.println(regionDTO);

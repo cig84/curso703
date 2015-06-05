@@ -48,9 +48,9 @@ public class Conexión {
 	
 	}
 	
-	public static Connection obtenerConexion ()	{
+	public static Connection obtenerConexion () throws SQLException	{
 		
-		return conexion.connection;
+		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "HR", "database");
 	}
 	
 	public static void liberarRecursos (Connection conn, Statement stmt, ResultSet rset) {
