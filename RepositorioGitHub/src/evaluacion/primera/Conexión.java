@@ -9,11 +9,14 @@ import java.sql.Statement;
 
 public class Conexión {
 	
+	/* esta clase permite establecer una conección con la base de datos para hacer consultas. */
 	private static Conexión conexion = new Conexión();
 	private Connection connection;
 	
 	private Conexión() {
-	
+		
+	/* el constructor de la clase que permite obtener una conneccion con la base de datos.
+	 * Para esto necesitamos un driver, una cadena de conección, el usuario y la contraseña. */
 		String s_driver = "oracle.jdbc.driver.OracleDriver";
 		String cadena_conexion = "jdbc:oracle:thin:@localhost:1521:xe";
 		String usuario = "HR";
@@ -50,11 +53,14 @@ public class Conexión {
 	
 	public static Connection obtenerConexion () throws SQLException	{
 		
+		/* este método crea la conección a la base de datos a través del metodo fetConnection de la clase
+		 * DriverManager. */
 		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "HR", "database");
 	}
 	
 	public static void liberarRecursos (Connection conn, Statement stmt, ResultSet rset) {
 		
+		/* este método líbera los recursos utilizados. */
 		if (rset != null) 	{ try { rset.close(); } catch (Exception e1) { e1.printStackTrace(); }}
 		if (stmt != null)	{ try {	stmt.close(); } catch (Exception e2) { e2.printStackTrace(); }}
 		if (conn != null) 	{ try { conn.close(); } catch (Exception e3) { e3.printStackTrace(); }}
@@ -62,6 +68,8 @@ public class Conexión {
 	
 	public static void liberarRecursos (Connection conn, Statement stmt) {
 		
+		/* este método está sobrecargado y líbera solo los recursos de tiop Connection y Statement dado
+		 * que no siempre necesitamos de un ResultSet. */
 		if (stmt != null)	{ try {	stmt.close(); } catch (Exception e2) { e2.printStackTrace(); }}
 		if (conn != null) 	{ try { conn.close(); } catch (Exception e3) { e3.printStackTrace(); }}
 	}

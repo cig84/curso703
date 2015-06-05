@@ -7,8 +7,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/* esta clase es la que tiene los metodos que nos permiten interactuar con la base de datos. */
 public class RegionDAO {
 	
+	/* este método devuelve un objeto RegionDTO insertando los valores devueltos por la consulta
+	 * en los atributos apropriados del objeto. Está utilizado por los métodos (recuperarPorIdentificador()
+	 * y obtenerTodas() que necesitan crear un nuevo objeto RegionDTO por cada registro devuelto
+	 * por la consulta.  */
 	private static RegionDTO componerObjeto (ResultSet rs) throws SQLException {
 		RegionDTO region = null;
 		
@@ -21,7 +26,11 @@ public class RegionDAO {
 	}
 	
 	public static RegionDTO recuperarPorIdentificador () throws SQLException {
-		
+	
+		/* este método devuelve un objeto RegionDTO despues de la consulta RECUPERAR_POR_IDENTIFICADOR.
+		 * Para hacer la consulta necesitamos obtener una conección con la base de datos y poner el
+		 * resultado en un objeto ResultSet desde el cual componeremos el objeto RegionDTO. Al final
+		 * vamos a liberar los recursos utilizados. */	
 		Connection conexion = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -51,6 +60,8 @@ public class RegionDAO {
 	
 	public static void insertarNueva () throws SQLException {
 		
+		/* este método obtiene una conección y ejecuta una consulta para insertar un nuevo registo en la
+		 * tabla. Al final vamos a liberar los recursos. */
 		Connection conexion = null;
 		Statement stmt = null;
 
@@ -73,6 +84,9 @@ public class RegionDAO {
 	
 	public static List<RegionDTO> obtenerTodas () throws SQLException {
 		
+		/* este método devuelve un objeto Lista<RegionDTO> contenente objetos RegionDTO creados por
+		 * el método componerObjeto() que recive un ResultSet con el resultado de la consulta y añadidos
+		 * a la Lista con el método add() de la propria clase Lista. Al final vamos a liberar recursos. */
 		List<RegionDTO> lista_regiones = null;
 		Connection conexion = null;
 		Statement stmt = null;
