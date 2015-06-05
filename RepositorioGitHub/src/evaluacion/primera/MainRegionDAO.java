@@ -20,7 +20,7 @@ public class MainRegionDAO {
 			System.out.println(regionDTO);
 			System.out.println(lista_regiones);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		

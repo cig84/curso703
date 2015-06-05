@@ -1,5 +1,6 @@
 package evaluacion.primera;
 
+/* esta clase es la que contiene el constructor del proprio objeto RegionDTO.*/
 public class RegionDTO {
 	
 	private int region_Id;

@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/* esta clase es la que tiene los metodos que nos permiten interactuar con la base de datos. */
+/* esta clase es la que tiene los metodos que permiten al objeto RegionDTO interactuar con la base de datos. */
 public class RegionDAO {
 	
 	/* este método devuelve un objeto RegionDTO insertando los valores devueltos por la consulta
