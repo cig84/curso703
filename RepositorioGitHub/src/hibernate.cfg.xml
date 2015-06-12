@@ -22,7 +22,7 @@
         <property name="show_sql">true</property>
 
         <!-- Mapping files -->
-        <mapping resource="Region.hbm.xml"/>
+        <mapping resource="hibernate/Region.hbm.xml"/>
     </session-factory>
 
 </hibernate-configuration>

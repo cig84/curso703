@@ -90,7 +90,8 @@ public class MainIber
     	}
     	finally 
     	{
-    		session.close();//haya ido bien o mal, libero recursos!
+    		session.disconnect(); //así dejas la connección libre en el pool
+    		session.close();//haya ido bien o mal, libero recursos (cierro la connección definitivamente)!
     		factory.close();
     	}
     	

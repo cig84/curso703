@@ -5,7 +5,9 @@ public class Region {
 	private long region_id;
 	private String region_name;
 	
-	
+	public Region() {
+		
+	}
 	
 	public long getRegion_id() {
 		return region_id;
